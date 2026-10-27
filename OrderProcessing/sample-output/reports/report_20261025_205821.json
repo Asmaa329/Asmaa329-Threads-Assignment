@@ -1,0 +1,12 @@
+{
+  "totalOrders": 40,
+  "totalRevenue": 0,
+  "completedCount": 0,
+  "rejectedCount": 10,
+  "failedCount": 0,
+  "paymentFailedCount": 0,
+  "topSellingProduct": "None",
+  "topSellingQuantity": 0,
+  "averageOrderValue": 0,
+  "generatedAt": "2026-10-25T20:58:21.4167482+03:00"
+}

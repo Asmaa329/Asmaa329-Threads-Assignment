@@ -1,0 +1,42 @@
+[
+  {
+    "id": "39c6cf1f-a10e-46bc-af4d-f5f55f5e26fe",
+    "orderId": 1,
+    "to": "ahmed.ali@example.com",
+    "subject": "Order #1 Confirmed",
+    "body": "Dear Ahmed Ali, your order has been successfully completed.",
+    "sentAt": "2026-10-28T01:26:51.0824371+03:00",
+    "attempts": 1,
+    "lastError": null
+  },
+  {
+    "id": "00e26fdb-6f34-4b47-85c1-f9a4a0f74f6a",
+    "orderId": 2,
+    "to": "sara.mohamed@example.com",
+    "subject": "Order #2 Confirmed",
+    "body": "Dear Sara Mohamed, your order has been successfully completed.",
+    "sentAt": "2026-10-28T01:26:54.4446222+03:00",
+    "attempts": 1,
+    "lastError": null
+  },
+  {
+    "id": "015c0649-0c23-4076-a6a1-23d69fb74473",
+    "orderId": 3,
+    "to": "omar.hassan@example.com",
+    "subject": "Order #3 Confirmed",
+    "body": "Dear Omar Hassan, your order has been successfully completed.",
+    "sentAt": "2026-10-28T01:26:59.5476992+03:00",
+    "attempts": 1,
+    "lastError": null
+  },
+  {
+    "id": "be6ad626-cda0-4e9f-b921-3892d819e9e2",
+    "orderId": 5,
+    "to": "youssef.adel@example.com",
+    "subject": "Order #5 Confirmed",
+    "body": "Dear Youssef Adel, your order has been successfully completed.",
+    "sentAt": "2026-10-28T01:27:03.7848868+03:00",
+    "attempts": 1,
+    "lastError": null
+  }
+]

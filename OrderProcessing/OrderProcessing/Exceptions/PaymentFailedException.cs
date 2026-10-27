@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace OrderProcessing.OrderProcessing.Exceptions
+{
+    public class PaymentFailedException : Exception
+    {
+        public PaymentFailedException(string message) : base(message) { }
+    }
+}

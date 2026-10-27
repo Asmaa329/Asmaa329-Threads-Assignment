@@ -1,0 +1,14 @@
+﻿## Asmaa Diab Abdelsamee Raghep   Groub # 1 .NET
+
+R1: Failures Observed in the Original CodeWhen running the original multi-threaded setup without synchronization, several critical concurrency issues occur:Lost Updates & Data Corruption in Dictionary: Dictionary<string, int> is not thread-safe.
+When multiple viewer threads execute RecordView concurrently, they read and write to the internal bucket arrays without synchronization. This causes race conditions where increments overwrite each other, resulting in viewActual being significantly lower than viewExpected.
+In severe cases, structural modifications trigger internal resizing corruption, leading to InvalidOperationException or infinite loops
+Race Conditions & Exceptions in Queue: Queue<string> is not thread-safe for concurrent multi-producer/multi-consumer access. Checking EmailJobs.Count > 0 and subsequently calling EmailJobs.Dequeue() across multiple background workers creates a race window. 
+If another worker dequeues the item first, the calling thread encounters an InvalidOperationException (handled clumsily by the catch block) or attempts to process a null/missing job.
+
+R2: The Fixes ImplementedThread-Safe View Counting: Swapped Dictionary<string, int> for ConcurrentDictionary<string, int> and utilized the atomic AddOrUpdate method. This guarantees that incrementing view counts for any product is thread-safe without needing explicit manual locks.
+Thread-Safe Job Queueing: Swapped Queue<string> for ConcurrentQueue<string> and replaced the split Count > 0 / Dequeue() check with the atomic TryDequeue and IsEmpty properties.Protected Output List: Maintained the existing lock (_sentSync) block around SentEmails.Add(job) to ensure thread-safe collection additions from multiple worker threads.
+
+R3: Why Collection Safety $\neq$ Business Rule SafetyMaking a collection thread-safe (such as using ConcurrentDictionary or ConcurrentQueue) only guarantees that the collection's internal data structures will not corrupt or throw exceptions during concurrent low-level operations like adding, removing, or resizing.
+It does not guarantee business rule or transactional integrity:Compound Operations: If a business requirement dictates a multi-step check-then-act logic (e.g., "If a user has fewer than 3 active sessions, add a session and send a welcome email"), individual collection methods are atomic only at the method level. Between the check and the action, another thread can alter the state, violating the business rule.
+Invariants: Protecting higher-level business invariants across multiple fields or dependent collections still requires explicit synchronization (such as locks, semaphores, or atomic delegate constructs like AddOrUpdate) to ensure the entire business transaction executes atomically.
